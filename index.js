@@ -11,10 +11,6 @@ const div4 = document.querySelector('#div4');
 const div5 = document.querySelector('#div5');
 const div6 = document.querySelector('#div6');
 
-div4.style.height = '200px';
-div4.style.width = '200px';
-div4.style.backgroundColor = 'white';
-
 div5.style.height = '200px';
 div5.style.width = '200px';
 div5.style.backgroundColor = 'white';
@@ -85,3 +81,36 @@ function rotateAnticlockwise() {
         isRotateOn = false;
     }, 400);
 }
+
+// Div 4
+div4.style.height = '200px';
+div4.style.width = '200px';
+let colorDiv4 = '#fff';
+div4.style.backgroundColor = colorDiv4;
+div4.style.color = 'black';
+div4.innerText = colorDiv4;
+
+const hexCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']; // 16 different posibilities
+
+div4.addEventListener('click', giveRandomeColor);
+
+function giveRandomeColor() {
+    colorDiv4 = '#';
+    for(let i = 0; i < 3; i++) {
+        let randomNum = Math.floor(Math.random() * (17 - 1) + 1);
+        colorDiv4 += hexCharacters[randomNum - 1];
+    }
+    div4.innerText = colorDiv4;
+    div4.style.backgroundColor = colorDiv4;
+    calcColorBrightness() >= 23 ? div4.style.color = 'black' : div4.style.color = 'white';
+}
+
+function calcColorBrightness() {
+    let Rvalue = hexCharacters.indexOf(colorDiv4[1]);
+    let Gvalue = hexCharacters.indexOf(colorDiv4[2]);
+    let Bvalue = hexCharacters.indexOf(colorDiv4[3]);
+    let totalBrightness = Rvalue + Gvalue + Bvalue;
+    return totalBrightness;
+}
+
+
