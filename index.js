@@ -11,14 +11,6 @@ const div4 = document.querySelector('#div4');
 const div5 = document.querySelector('#div5');
 const div6 = document.querySelector('#div6');
 
-div5.style.height = '200px';
-div5.style.width = '200px';
-div5.style.backgroundColor = 'white';
-
-div6.style.height = '200px';
-div6.style.width = '200px';
-div6.style.backgroundColor = 'white';
-
 // Div 1
 const div1Colors = [carroburgCrimson, '#EC2049', '#F26B38', '#F7DB4F', aquaLake];
 const div1ColorNames = ['Carroburg Crimson', 'Che Guevara Red', 'Mandarin Oragne', 'Gilded', 'Aqua Lake']
@@ -91,6 +83,7 @@ div4.style.color = 'black';
 div4.innerText = colorDiv4;
 
 const hexCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']; // 16 different posibilities
+const reversedHexCharactersArr = ['F', 'E', 'D', 'C', 'B', 'A', '9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
 
 div4.addEventListener('click', giveRandomeColor);
 
@@ -102,15 +95,47 @@ function giveRandomeColor() {
     }
     div4.innerText = colorDiv4;
     div4.style.backgroundColor = colorDiv4;
-    calcColorBrightness() >= 23 ? div4.style.color = 'black' : div4.style.color = 'white';
+    div4.style.color = giveTextColor(colorDiv4);
+    div6.style.backgroundColor = invertColor(colorDiv4);
+    div6.style.color = giveTextColor(invertColor(colorDiv4))
 }
 
-function calcColorBrightness() {
-    let Rvalue = hexCharacters.indexOf(colorDiv4[1]);
-    let Gvalue = hexCharacters.indexOf(colorDiv4[2]);
-    let Bvalue = hexCharacters.indexOf(colorDiv4[3]);
-    let totalBrightness = Rvalue + Gvalue + Bvalue;
-    return totalBrightness;
+function giveTextColor(HexBackgroundColor) {
+    let R = hexCharacters.indexOf(HexBackgroundColor[1]);
+    let G = hexCharacters.indexOf(HexBackgroundColor[2]);
+    let B = hexCharacters.indexOf(HexBackgroundColor[3]);
+    let totalBrightness = R + G + B;
+    if (totalBrightness >= 23) {result = 'black'}
+    else {result = 'white'}
+    return result;
 }
 
+// Div 5
+div5.style.height = '200px';
+div5.style.width = '200px';
+div5.style.backgroundColor = 'white';
+div5.style.color = 'black';
+div5.innerText = 'Save Color';
 
+div5.addEventListener('click', () => {
+    div5.style.backgroundColor = colorDiv4;
+    div5.style.color = giveTextColor(colorDiv4);
+})
+
+
+
+// Div 6
+div6.style.height = '200px';
+div6.style.width = '200px';
+div6.style.backgroundColor = 'white';
+div6.style.color = 'black';
+div6.innerText = 'Contrast';
+
+// #fff
+function invertColor(color) {
+    let invertedColor = '#';
+    for (let i = 1; i < 4; i++) {
+        invertedColor += reversedHexCharactersArr[hexCharacters.indexOf(color[i])];
+    }
+    return invertedColor;
+}

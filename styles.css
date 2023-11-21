@@ -21,9 +21,6 @@ div {
 
 div > div {
     cursor: pointer;
-}
-
-#div1, #div2, #div4{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,6 +32,11 @@ div > div {
 
 #div4 {
     font-size: 3rem;
+    transition: background-color 1s;
+}
+
+#div6 {
+    transition: background-color 1s;
 }
 
 .rotateClockwise {
