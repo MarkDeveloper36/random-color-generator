@@ -33,3 +33,18 @@ div > div {
     font-weight: bold;
 }
 
+.rotateClockwise {
+    animation: spin90 400ms;
+}
+
+@keyframes spin90 {
+    100% {transform: rotate(90deg);}
+}
+
+.rotateAntiClockwise {
+    animation: spin-90 400ms;
+}
+
+@keyframes spin-90 {
+    100% {transform: rotate(-90deg);}
+}
